@@ -1,26 +1,35 @@
+/* ==========================================================================
+   CSS BRAND DESIGN SYSTEM - BRAINWAY TOT LANDING PAGE
+   ========================================================================== */
 :root {
-    --deep-red-dark: #7A000D;
-    --deep-red-primary: #990011;
-    --deep-red-light: #B80018;
-    --royal-blue: #1E3A8A;
-    --royal-blue-light: #3B82F6;
-    --warm-gold: #C5A02B;
-    --warm-gold-bg: rgba(197, 160, 43, 0.08);
-    --dark-charcoal: #1E2022;
-    --medium-charcoal: #282A2D;
-    --light-charcoal: #323539;
+    /* Brand Colors (Inspired by the Brainway Logo) */
+    --deep-red-primary: #990011;       /* Deep Red / Maroon */
+    --deep-red-dark: #7A000D;          /* Darker Maroon for states */
+    --deep-red-light: #B80018;         /* Light Maroon for hover */
+    --royal-blue: #1E3A8A;             /* Royal Blue Accent */
+    --royal-blue-light: #2563EB;       /* Light Blue Accent */
+    --warm-gold: #C5A02B;              /* Warm Gold / Yellow */
+    --warm-gold-bg: rgba(197, 160, 43, 0.08); /* Transparent Gold for badges */
+    
+    /* Neutrals */
+    --dark-charcoal: #121214;          /* Main dark background / typography */
+    --medium-charcoal: #1E1E22;        /* Card backgrounds / sections */
+    --light-charcoal: #2A2C30;         /* Secondary dark panels */
     --white: #FFFFFF;
-    --off-white: #F9FAFB;
-    --light-gray: #F0F2F5;
+    --off-white: #F8F9FA;              /* Main page background contrast */
+    --light-gray: #F3F4F6;
+    
+    /* Layout & Styling details */
     --border-color: rgba(0, 0, 0, 0.08);
     --border-color-white: rgba(255, 255, 255, 0.1);
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
     --font-primary: 'Outfit', sans-serif;
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Reset & Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -42,19 +51,17 @@ body {
     line-height: 1.6;
 }
 
-/* Typography styles */
 h1, h2, h3, h4 {
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.25;
     color: var(--dark-charcoal);
 }
 
 p {
     font-weight: 400;
-    color: #4A4A4A;
+    color: #4A5568;
 }
 
-/* Main Container */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -62,13 +69,21 @@ p {
     padding: 0 1.5rem;
 }
 
-/* CTA Buttons */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Universal Button Styles */
 .cta-button {
     display: inline-block;
     width: 100%;
-    padding: 1.1rem 2rem;
+    padding: 1.15rem 2rem;
     font-size: 1.15rem;
-    font-weight: 700;
+    font-weight: 800;
     text-align: center;
     color: var(--white);
     background: linear-gradient(135deg, var(--deep-red-primary), var(--deep-red-dark));
@@ -105,31 +120,18 @@ p {
     }
 }
 
-.cta-button.cta-red {
-    background: linear-gradient(135deg, var(--deep-red-primary), var(--deep-red-dark));
-}
-
-/* Global utility classes */
-.text-center {
-    text-align: center;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* SECTION HEADER STYLE */
+/* Section Header styling */
 .section-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .section-title {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 2.1rem;
+    font-weight: 850;
     margin-bottom: 0.75rem;
     position: relative;
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
 }
 
 .section-title::after {
@@ -140,30 +142,62 @@ p {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: var(--deep-red-primary);
+    background-color: var(--royal-blue);
     border-radius: 2px;
 }
 
 .section-subtitle {
     font-size: 1.1rem;
     max-width: 650px;
-    margin: 0 auto;
-    color: #666;
+    margin: 0.75rem auto 0 auto;
+    color: #555;
+    line-height: 1.6;
 }
 
 /* ==========================================================================
-   1. HERO SECTION STYLES (Mobile First)
+   1. HERO SECTION STYLES (Dark Premium Theme)
    ========================================================================== */
 .hero-section {
-    padding: 3rem 0 2.5rem 0;
-    background-color: var(--off-white);
-    border-bottom: 1px solid var(--border-color);
+    padding: 3.5rem 0 3rem 0;
+    background: linear-gradient(135deg, var(--dark-charcoal) 0%, var(--medium-charcoal) 100%);
+    border-bottom: 4px solid var(--royal-blue);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative glowing blobs behind dark hero text */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(30, 58, 138, 0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(153, 0, 17, 0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
 }
 
 .hero-container {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 3rem;
+    position: relative;
+    z-index: 5;
 }
 
 .hero-content {
@@ -174,89 +208,110 @@ p {
 }
 
 .logo-container {
-    margin-bottom: 1rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 1.5rem;
     display: flex;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-end;
+    width: auto;
+    z-index: 10;
 }
 
 .brand-logo {
-    height: 48px;
-    width: auto;
+    width: 95px; /* Mobile width (85px to 110px) */
+    height: auto;
     object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
 }
 
 .programme-tag {
     display: inline-block;
     font-size: 0.85rem;
     font-weight: 800;
-    color: var(--royal-blue);
-    background-color: rgba(30, 58, 138, 0.07);
-    border: 1px solid rgba(30, 58, 138, 0.12);
+    color: var(--royal-blue-light);
+    background-color: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.2);
     padding: 0.4rem 1rem;
     border-radius: 50px;
-    margin-bottom: 1rem;
+    margin-top: 2.5rem; /* Prevents overlap with the absolutely positioned top-right logo */
+    margin-bottom: 1.25rem;
     letter-spacing: 1px;
 }
 
 .hero-headline {
-    font-size: 2.1rem;
-    font-weight: 800;
-    color: var(--dark-charcoal);
-    margin-bottom: 0.75rem;
-    line-height: 1.25;
+    font-size: 2.25rem;
+    font-weight: 850;
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.highlight-red {
+    color: var(--warm-gold);
+    text-shadow: 0 2px 10px rgba(197, 160, 43, 0.1);
 }
 
 .hero-subheadline {
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 1rem;
-    border-left: 3px solid var(--royal-blue);
-    padding-left: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--royal-blue-light);
+    padding-left: 12px;
     text-align: center;
 }
 
 .hero-short-text {
     font-size: 1rem;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 2rem;
-    font-weight: 500;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 auto 2.5rem auto;
+    font-weight: 400;
     text-align: center;
     max-width: 550px;
+    border-left: 3px solid var(--warm-gold);
+    padding-left: 1rem;
+    font-style: italic;
 }
 
 .hero-details {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.85rem;
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .detail-badge {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: var(--white);
-    padding: 0.9rem 1.25rem;
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1rem 1.25rem;
     border-radius: 12px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     text-align: left;
+    transition: var(--transition);
+}
+
+.detail-badge:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--royal-blue-light);
+    transform: translateX(4px);
 }
 
 .detail-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+    width: 44px;
+    height: 44px;
     border-radius: 10px;
     background-color: var(--warm-gold-bg);
     color: var(--warm-gold);
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     flex-shrink: 0;
 }
 
@@ -267,16 +322,16 @@ p {
 
 .detail-label {
     font-size: 0.75rem;
-    color: #888;
+    color: rgba(255, 255, 255, 0.45);
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
 
 .detail-value {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--dark-charcoal);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
 }
 
 .hero-cta-wrapper {
@@ -284,13 +339,13 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
 }
 
 .cta-warning {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--deep-red-primary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--warm-gold);
 }
 
 .hero-visual {
@@ -306,10 +361,18 @@ p {
     max-width: 420px;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    border: 3px solid var(--white);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 4px solid rgba(255, 255, 255, 0.08);
+    background-color: var(--medium-charcoal);
     display: block;
     height: auto;
+    transition: var(--transition);
+}
+
+.image-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 45px rgba(30, 58, 138, 0.3);
+    border-color: var(--royal-blue-light);
 }
 
 .instructor-img {
@@ -321,17 +384,17 @@ p {
 }
 
 /* ==========================================================================
-   2. WHAT YOU WILL LEARN SECTION
+   2. LEARN SECTION STYLES (Visibly Redesigned Cards)
    ========================================================================== */
 .learn-section {
-    padding: 4rem 0;
-    background-color: var(--white);
+    padding: 5rem 0;
+    background-color: var(--off-white);
 }
 
 .learn-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.5rem;
 }
 
 .learn-card {
@@ -339,50 +402,70 @@ p {
     align-items: flex-start;
     gap: 1.25rem;
     background-color: var(--white);
-    padding: 1.5rem 1.75rem;
-    border-radius: 16px;
+    padding: 1.75rem;
+    border-radius: 18px;
     border: 1px solid rgba(30, 58, 138, 0.06);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+    transition: var(--transition);
+    position: relative;
+}
+
+.learn-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0;
+    background-color: var(--royal-blue);
+    border-radius: 0 4px 4px 0;
     transition: var(--transition);
 }
 
 .learn-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.06);
-    border-color: rgba(30, 58, 138, 0.25);
+    box-shadow: 0 12px 30px rgba(30, 58, 138, 0.06);
+    border-color: rgba(30, 58, 138, 0.2);
+}
+
+.learn-card:hover::before {
+    height: 60%;
 }
 
 .card-icon {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 900;
     color: var(--warm-gold);
     background-color: var(--warm-gold-bg);
-    min-width: 34px;
-    height: 34px;
+    min-width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    border: 1px solid rgba(197, 160, 43, 0.15);
 }
 
 .card-text {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--dark-charcoal);
-    line-height: 1.5;
-    padding-top: 0.25rem;
+    line-height: 1.6;
 }
 
 /* ==========================================================================
-   3. CAREER SECTION STYLES
+   3. CAREER SECTION STYLES (Visually Motivating Quote Panel)
    ========================================================================== */
 .career-section {
-    padding: 5rem 0;
+    padding: 5.5rem 0;
     background: linear-gradient(135deg, var(--medium-charcoal), var(--dark-charcoal));
     color: var(--white);
     position: relative;
     overflow: hidden;
+    border-top: 4px solid var(--warm-gold);
+    border-bottom: 4px solid var(--royal-blue);
 }
 
 .career-section::before {
@@ -392,7 +475,7 @@ p {
     right: -50px;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(30, 58, 138, 0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(30, 58, 138, 0.2) 0%, transparent 75%);
     pointer-events: none;
 }
 
@@ -403,23 +486,23 @@ p {
     left: -50px;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(197, 160, 43, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(197, 160, 43, 0.12) 0%, transparent 75%);
     pointer-events: none;
 }
 
 .career-title {
     color: var(--white);
     font-size: 2.1rem;
-    font-weight: 800;
+    font-weight: 850;
     margin-bottom: 1.5rem;
     line-height: 1.35;
     letter-spacing: 0.5px;
 }
 
 .career-desc {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1.1rem;
-    max-width: 750px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.15rem;
+    max-width: 780px;
     margin: 0 auto 2.5rem auto;
     line-height: 1.8;
 }
@@ -430,47 +513,47 @@ p {
 }
 
 /* ==========================================================================
-   4. PROGRAMME INFO SECTION STYLES
+   4. PROGRAMME INFO SECTION STYLES (Visual Cards Layout)
    ========================================================================== */
 .info-section {
-    padding: 4rem 0;
-    background-color: var(--off-white);
+    padding: 5rem 0;
+    background-color: var(--white);
 }
 
 .info-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.5rem;
     margin-bottom: 3rem;
 }
 
 .info-card {
-    background-color: var(--white);
+    background-color: var(--off-white);
     padding: 1.75rem;
-    border-radius: 16px;
-    border: 1px solid rgba(30, 58, 138, 0.06);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
     text-align: center;
     transition: var(--transition);
 }
 
 .info-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(30, 58, 138, 0.06);
-    border-color: rgba(30, 58, 138, 0.25);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(30, 58, 138, 0.15);
 }
 
 .info-card-icon {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--warm-gold);
     margin-bottom: 0.75rem;
 }
 
 .info-card-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: #666;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .info-card-val {
@@ -481,26 +564,26 @@ p {
 
 .fee-container {
     background-color: var(--white);
-    padding: 2rem 1.5rem;
-    border-radius: 20px;
+    padding: 2.5rem 1.75rem;
+    border-radius: 24px;
     border: 1px solid rgba(30, 58, 138, 0.06);
     border-top: 4px solid var(--warm-gold);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
-    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    margin-bottom: 2.5rem;
 }
 
 .fee-title {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1.6rem;
+    font-weight: 850;
     text-align: center;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
     color: var(--dark-charcoal);
 }
 
 .fee-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
 .fee-card {
@@ -509,7 +592,7 @@ p {
     align-items: center;
     background-color: var(--off-white);
     padding: 1.25rem 1.5rem;
-    border-radius: 12px;
+    border-radius: 14px;
     border-left: 4px solid var(--royal-blue);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.015);
     transition: var(--transition);
@@ -528,14 +611,14 @@ p {
 }
 
 .fee-amount {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 850;
     color: var(--deep-red-primary);
 }
 
 .info-warning {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.05rem;
+    font-weight: 750;
     color: var(--deep-red-primary);
     display: flex;
     align-items: center;
@@ -544,20 +627,21 @@ p {
 }
 
 /* ==========================================================================
-   5. LEAD GENERATION FORM STYLES
+   5. LEAD GENERATION FORM STYLES (High-Conversion Card)
    ========================================================================== */
 .lead-section {
     padding: 5rem 0;
     background-color: var(--off-white);
+    border-top: 1px solid var(--border-color);
 }
 
 .lead-card {
     background-color: var(--white);
-    border-radius: 24px;
+    border-radius: 28px;
     padding: 2.5rem 1.75rem;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(30, 58, 138, 0.05);
-    border-top: 5px solid var(--royal-blue);
+    border-top: 6px solid var(--deep-red-primary);
     max-width: 600px;
     margin: 0 auto;
     position: relative;
@@ -570,7 +654,7 @@ p {
 
 .lead-title {
     font-size: 1.75rem;
-    font-weight: 800;
+    font-weight: 850;
     margin-bottom: 0.75rem;
     line-height: 1.35;
     color: var(--dark-charcoal);
@@ -585,13 +669,13 @@ p {
 .lead-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.35rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
 }
 
 .form-label {
@@ -602,9 +686,9 @@ p {
 
 .form-control {
     width: 100%;
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 1.25rem;
     font-size: 1.05rem;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(0, 0, 0, 0.08);
     border-radius: 12px;
     background-color: var(--white);
     color: var(--dark-charcoal);
@@ -633,7 +717,7 @@ p {
     width: 100%;
     padding: 1.15rem;
     font-size: 1.2rem;
-    font-weight: 800;
+    font-weight: 850;
     color: var(--white);
     background: linear-gradient(135deg, var(--deep-red-primary), var(--deep-red-dark));
     border: none;
@@ -654,7 +738,6 @@ p {
     transform: translateY(0);
 }
 
-/* Success message animation states */
 .success-message {
     padding: 3rem 1.5rem;
     display: flex;
@@ -694,19 +777,21 @@ p {
     }
 }
 
-/* Footer styling */
+/* ==========================================================================
+   6. FOOTER STYLES
+   ========================================================================== */
 .lead-footer {
-    margin-top: 3rem;
+    margin-top: 3.5rem;
     border-top: 1px solid var(--border-color);
-    padding-top: 2rem;
+    padding-top: 2.25rem;
 }
 
 .footer-org {
     font-size: 0.95rem;
     font-weight: 800;
-    color: #666;
+    color: #555;
     letter-spacing: 1px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .footer-contact {
@@ -753,25 +838,22 @@ p {
     }
 }
 
-
 /* ==========================================================================
    DESKTOP SCREEN LAYOUTS (Min-width: 768px)
    ========================================================================== */
 @media (min-width: 768px) {
-    /* Container adjustment */
     .container {
         padding: 0 2rem;
     }
 
-    /* Section titles size */
     .section-title {
         font-size: 2.5rem;
     }
 
-    /* Hero side-by-side */
+    /* Hero side-by-side desktop view */
     .hero-section {
-        padding: 6rem 0;
-        min-height: 80vh;
+        padding: 6.5rem 0;
+        min-height: 85vh;
         display: flex;
         align-items: center;
     }
@@ -779,7 +861,7 @@ p {
     .hero-container {
         flex-direction: row;
         align-items: center;
-        gap: 4rem;
+        gap: 4.5rem;
     }
 
     .hero-content {
@@ -789,23 +871,29 @@ p {
     }
 
     .logo-container {
-        justify-content: flex-start;
-        margin-bottom: 1.5rem;
+        top: 2rem;
+        right: 2rem;
+        margin-bottom: 0;
     }
 
     .brand-logo {
-        height: 56px;
+        width: 140px; /* desktop size (120px to 160px) */
+        height: auto;
+    }
+
+    .programme-tag {
+        margin-top: 0;
     }
 
     .hero-headline {
-        font-size: 3.2rem;
+        font-size: 3.35rem;
         margin-bottom: 1.25rem;
     }
 
     .hero-subheadline {
         font-size: 1.4rem;
         text-align: left;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.5rem;
     }
 
     .hero-short-text {
@@ -854,13 +942,13 @@ p {
         height: 100%;
     }
 
-    /* Learn Grid: 3 columns */
+    /* Grid structures: Learn cards */
     .learn-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
 
-    /* Career Section */
+    /* Career header text */
     .career-title {
         font-size: 2.75rem;
     }
@@ -869,13 +957,12 @@ p {
         font-size: 1.25rem;
     }
 
-    /* Info Grid: 3 columns */
+    /* Info grids */
     .info-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
     }
 
-    /* Fee Table */
     .fee-container {
         padding: 3rem;
     }
@@ -911,14 +998,12 @@ p {
         font-size: 1.6rem;
     }
 
-    /* Lead Form Card styling */
     .lead-card {
         padding: 3.5rem;
     }
 }
 
 @media (min-width: 1024px) {
-    /* Learn Grid: 3 columns */
     .learn-grid {
         grid-template-columns: repeat(3, 1fr);
     }
