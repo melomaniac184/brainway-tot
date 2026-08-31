@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitButton = leadForm ? leadForm.querySelector('.submit-button') : null;
 
     if (leadForm && submitButton) {
-        leadForm.addEventListener('submit', (e) => {
+        leadForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             // Extract input values
@@ -64,38 +64,45 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('profession', profession);
             formData.append('city', city);
 
-            // POST form details to Google Apps Script with no-cors mode
-            // This transmits the lead data securely to your Google Sheet in the background.
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData
-            });
+            try {
+                // POST form details to Google Apps Script with no-cors mode
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData
+                });
 
-            // Immediately handle submission as successful on the frontend to bypass Google Apps Script's CORS/redirect blocks.
-            // Since the lead is sent to the network stack, it is successfully written to the sheet in the background.
-            
-            // 1. Reset the form inputs
-            leadForm.reset();
+                // IMMEDIATELY treat the submission as successful once fetch resolves
+                // 1. Reset the form inputs
+                leadForm.reset();
 
-            // 2. Restore the submit button state (for future interactions or clean states)
-            submitButton.disabled = false;
-            submitButton.textContent = originalBtnText;
+                // 2. Restore the submit button state
+                submitButton.disabled = false;
+                submitButton.textContent = originalBtnText;
 
-            // 3. Show the success thank-you message
-            leadForm.style.transition = 'opacity 0.3s ease';
-            leadForm.style.opacity = '0';
+                // 3. Show the success thank-you message
+                leadForm.style.transition = 'opacity 0.3s ease';
+                leadForm.style.opacity = '0';
 
-            setTimeout(() => {
-                leadForm.classList.add('hidden');
-                if (successState) {
-                    successState.classList.remove('hidden');
-                    successState.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            }, 300);
+                setTimeout(() => {
+                    leadForm.classList.add('hidden');
+                    if (successState) {
+                        successState.classList.remove('hidden');
+                        successState.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }, 300);
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('माहिती पाठवताना त्रुटी झाली. कृपया पुन्हा प्रयत्न करा.');
+                
+                // Re-enable button on failure
+                submitButton.disabled = false;
+                submitButton.textContent = originalBtnText;
+            }
         });
     }
 });
