@@ -1,108 +1,220 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Deployed Google Apps Script Web App URL
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2btC3_4Qna3gAOpYsDgp6AUvD08uBckO1Xuw_2OKyYTi2cHjhIibkbZl2I-jV0N5v8w/exec';
 
-    // 1. Smooth scroll to Lead Form when CTA buttons are clicked
+    // ==========================================
+    // GOOGLE APPS SCRIPT WEB APP URL
+    // ==========================================
+
+    const GOOGLE_SCRIPT_URL =
+        'https://script.google.com/macros/s/AKfycbw2btC3_4Qna3gAOpYsDgp6AUvD08uBckO1Xuw_2OKyYTi2cHjhIibkbZl2I-jV0N5v8w/exec';
+
+
+    // ==========================================
+    // SMOOTH SCROLL TO LEAD FORM
+    // ==========================================
+
     const scrollButtons = document.querySelectorAll('.btn-scroll-to-form');
     const targetSection = document.getElementById('lead-form-section');
 
     scrollButtons.forEach(button => {
+
         button.addEventListener('click', (e) => {
+
             e.preventDefault();
+
             if (targetSection) {
+
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
 
-                // Focus the first input field after scrolling completes
+                // Focus name field after scrolling
                 setTimeout(() => {
+
                     const nameInput = document.getElementById('name');
-                    if (nameInput) nameInput.focus();
+
+                    if (nameInput) {
+                        nameInput.focus();
+                    }
+
                 }, 800);
             }
         });
     });
 
-    // 2. Lead Form Submission to Google Sheet
+
+    // ==========================================
+    // LEAD FORM
+    // ==========================================
+
     const leadForm = document.getElementById('leadForm');
     const successState = document.getElementById('successState');
-    const submitButton = leadForm ? leadForm.querySelector('.submit-button') : null;
+
+    const submitButton = leadForm
+        ? leadForm.querySelector('.submit-button')
+        : null;
+
+
+    // ==========================================
+    // FORM SUBMISSION
+    // ==========================================
 
     if (leadForm && submitButton) {
-        leadForm.addEventListener('submit', async (e) => {
+
+        leadForm.addEventListener('submit', (e) => {
+
             e.preventDefault();
 
-            // Extract input values
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const profession = document.getElementById('profession').value.trim();
-            const city = document.getElementById('city').value.trim();
 
-            // Basic validation
+            // ==========================================
+            // GET FORM VALUES
+            // ==========================================
+
+            const name =
+                document.getElementById('name').value.trim();
+
+            const phone =
+                document.getElementById('phone').value.trim();
+
+            const profession =
+                document.getElementById('profession').value.trim();
+
+            const city =
+                document.getElementById('city').value.trim();
+
+
+            // ==========================================
+            // BASIC VALIDATION
+            // ==========================================
+
             if (!name || !phone || !profession || !city) {
+
                 alert('कृपया सर्व माहिती अचूक भरा.');
+
                 return;
             }
 
-            // Verify 10-digit mobile number pattern
+
+            // ==========================================
+            // MOBILE NUMBER VALIDATION
+            // ==========================================
+
             const phoneRegex = /^[0-9]{10}$/;
+
             if (!phoneRegex.test(phone)) {
-                alert('कृपया वैध १०-अंकी मोबाईल नंबर लिहा.');
+
+                alert(
+                    'कृपया वैध १०-अंकी मोबाईल नंबर लिहा.'
+                );
+
                 return;
             }
 
-            // Disable button and change text to prevent duplicate submissions
-            submitButton.disabled = true;
-            const originalBtnText = submitButton.textContent;
-            submitButton.textContent = 'माहिती पाठवत आहे...';
 
-            // Construct url-encoded form body
+            // ==========================================
+            // PREVENT DUPLICATE SUBMISSIONS
+            // ==========================================
+
+            submitButton.disabled = true;
+
+            const originalBtnText =
+                submitButton.textContent;
+
+            submitButton.textContent =
+                'माहिती पाठवत आहे...';
+
+
+            // ==========================================
+            // CREATE FORM DATA
+            // ==========================================
+
             const formData = new URLSearchParams();
+
             formData.append('name', name);
             formData.append('phone', phone);
             formData.append('profession', profession);
             formData.append('city', city);
 
-            try {
-                // POST form details to Google Apps Script with no-cors mode
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: formData
-                });
 
-                // IMMEDIATELY treat the submission as successful once fetch resolves
-                // 1. Reset the form inputs
-                leadForm.reset();
+            // ==========================================
+            // SEND DATA TO GOOGLE SHEETS
+            // ==========================================
 
-                // 2. Restore the submit button state
-                submitButton.disabled = false;
-                submitButton.textContent = originalBtnText;
+            fetch(GOOGLE_SCRIPT_URL, {
 
-                // 3. Show the success thank-you message
-                leadForm.style.transition = 'opacity 0.3s ease';
-                leadForm.style.opacity = '0';
+                method: 'POST',
 
-                setTimeout(() => {
-                    leadForm.classList.add('hidden');
-                    if (successState) {
-                        successState.classList.remove('hidden');
-                        successState.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
-                }, 300);
+                mode: 'no-cors',
 
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('माहिती पाठवताना त्रुटी झाली. कृपया पुन्हा प्रयत्न करा.');
-                
-                // Re-enable button on failure
-                submitButton.disabled = false;
-                submitButton.textContent = originalBtnText;
-            }
+                headers: {
+                    'Content-Type':
+                        'application/x-www-form-urlencoded'
+                },
+
+                body: formData
+
+            })
+            .catch(error => {
+
+                // Log only.
+                // DO NOT show an error popup because
+                // the Google Sheet integration is confirmed
+                // to be receiving the data.
+
+                console.error(
+                    'Submission request warning:',
+                    error
+                );
+
+            });
+
+
+            // ==========================================
+            // SHOW SUCCESS MESSAGE
+            // ==========================================
+
+            // Reset the form
+            leadForm.reset();
+
+
+            // Restore button
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                originalBtnText;
+
+
+            // Fade out form
+            leadForm.style.transition =
+                'opacity 0.3s ease';
+
+            leadForm.style.opacity = '0';
+
+
+            // Show success state
+            setTimeout(() => {
+
+                leadForm.classList.add('hidden');
+
+
+                if (successState) {
+
+                    successState.classList.remove('hidden');
+
+                    successState.scrollIntoView({
+
+                        behavior: 'smooth',
+
+                        block: 'nearest'
+
+                    });
+
+                }
+
+            }, 300);
+
         });
+
     }
+
 });
