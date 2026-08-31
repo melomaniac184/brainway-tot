@@ -209,12 +209,12 @@ p {
 
 .logo-container {
     position: absolute;
-    top: 0.75rem;
-    right: 1.5rem;
+    top: 1rem;
+    right: 1rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 95px; /* Mobile width (90px to 110px) */
+    width: 75px; /* Mobile width (70px to 85px max) */
     z-index: 10;
 }
 
@@ -234,7 +234,7 @@ p {
     border: 1px solid rgba(37, 99, 235, 0.2);
     padding: 0.4rem 1rem;
     border-radius: 50px;
-    margin-top: 2.5rem; /* Prevents overlap with the absolutely positioned top-right logo */
+    margin-top: 5rem; /* Vertically offsets content to prevent horizontal overlap or vertical collision with logo */
     margin-bottom: 1.25rem;
     letter-spacing: 1px;
 }
