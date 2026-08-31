@@ -1011,3 +1011,101 @@ p {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+
+/* =========================================
+   HERO CONTENT POSITIONING
+========================================= */
+
+.hero-section {
+    position: relative;
+}
+
+.hero-content {
+    position: relative;
+}
+
+
+/* =========================================
+   BRAINWAY LOGO - DESKTOP
+========================================= */
+
+.logo-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    width: 130px;
+
+    display: block;
+
+    z-index: 100;
+}
+
+.brand-logo {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+    background: transparent;
+
+    border: none;
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE LOGO
+========================================= */
+
+@media (max-width: 768px) {
+
+    .hero-content {
+        position: relative;
+        padding-top: 15px;
+    }
+
+    .logo-container {
+        position: absolute;
+
+        top: 12px;
+        right: 12px;
+
+        width: 80px;
+
+        z-index: 100;
+    }
+
+    .brand-logo {
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        object-fit: contain;
+
+        background: transparent;
+
+        border: none;
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+
+    /* Prevent programme tag from going underneath logo */
+
+    .programme-tag {
+        display: inline-block;
+
+        max-width: calc(100% - 100px);
+
+        margin-right: 90px;
+    }
+}
